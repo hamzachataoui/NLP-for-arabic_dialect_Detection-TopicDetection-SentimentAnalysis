@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>NLP for dialect Detection</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<style type="text/css">
+		.form {
+
+		}
+	</style>
+
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="logo">
+			<img src="https://admission.um6p.ma/frontend/images/logo_header.png" height="150px">
+			<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/633656/images/6078565/msda.png" height="150px" style="float: right;">	
+		</div>
+		<div class="form">
+			<form action="{{ url_for('predict')}}" method="post">
+			    <label for="exampleFormControlTextarea1">Entre your tweet :</label>
+			    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="text"></textarea>
+			    <button type="submit" class="btn btn-primary mb-2" style="margin-top: 20px">Submit</button>	
+			</form>
+		</div>
+
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

@@ -1,1 +1,146 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>NLP for dialect Detection</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
+<link rel = "icon" href = "https://ria.gallerycdn.vsassets.io/extensions/ria/nlp/0.2.11/1487192519683/Microsoft.VisualStudio.Services.Icons.Default" type = "image/x-icon"> <!--
+<link rel = "icon" href = "https://cascade.madmimi.com/theme_logos/0051/4635/original/NLP_Icon.png?1522405031" type = "image/x-icon">
+<link rel = "icon" href = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQFbw-uD4B9XEp19NOQyqqZFCTGsFAhAk_4aw&usqp=CAU" type = "image/x-icon"> 
+<link rel = "icon" href = "https://lh3.googleusercontent.com/proxy/SbuWltVADTr56oQfec-JQxo7OKspJ1ey4zx7cH10nr8pUhicSZADgi-ISwUB7V4XqPzBC-5B-RGugoGIJ720Ytg9X91f3bHh2IKASMF-ksw287ZE_q8" type = "image/x-icon"> -->
+
+
+<style type="text/css">
+	table {
+	  table-layout: auto;
+	}
+
+</style>
+</head>
+
+<body>
+
+	<div class="container-fluid">
+		<div class="logo">
+			<img src="https://admission.um6p.ma/frontend/images/logo_header.png" height="150px">
+			<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/633656/images/6078565/msda.png" height="150px" style="float: right;">	
+		</div>
+		<ul class="nav nav-tabs" id="myTab" role="tablist">
+		  <li class="nav-item" role="presentation">
+		    <a class="nav-link {% if (variable is not none) or (variables is none and variable is none) %}{{'active'}} {%endif %}" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Tweet</a>
+		  </li>
+		  <li class="nav-item" role="presentation">
+		    <a class="nav-link {% if variables is not none %}  {{'active'}} {%endif %}" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">File</a>
+		  </li>
+		</ul>
+		<div class="tab-content" id="myTabContent">
+		  <div class="tab-pane fade {% if (variable is not none) or (variables is none and variable is none) %}{{'show active'}} {%endif %}" id="home" role="tabpanel" aria-labelledby="home-tab">
+				<div id="tweet" class="col s12">
+						<form action="{{ url_for('predict')}}" method="post">
+						  <div class="form-group">
+						    <label for="exampleFormControlTextarea1" style="font-size: 20px; margin-top: 10px;">Entre your tweet :</label>
+						    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="text"></textarea>
+						    <button type="submit" class="btn btn-primary mb-2" style="margin-top: 20px">Submit</button>
+						  </div>
+						</form>
+
+				  <table class="highlight" style="width: 100%">
+			        <thead>
+			          <tr>
+			              <th style="text-align: center; width: 40%">Tweet</th>
+			              <th style="text-align: center; width: 20%">Sentiment</th>
+			              <th style="text-align: center; width: 20%">Topic</th>
+			              <th style="text-align: center; width: 20%">Dialect</th>
+			          </tr>
+			        </thead>
+
+			        <tbody>
+			        	{% if variable is not none %} 
+				        	{% for value in variable %}
+								<tr>
+									<td style="float: right;"> {{ value['tweet'] }} </td>
+									<td>
+										{% for sentiment, per in value['sentiment'].items() %}
+										<span style="float: left;margin-left:60px; color: green">{{ sentiment }}</span><span style="float: right;margin-right:60px; color: red">{{ per }}%</span><br>
+										{% endfor %}
+									</td>
+									<td>
+										{% for topic, per in value['topic'].items() %}
+										<span style="float: left;margin-left:60px; color: green">{{ topic }}</span><span style="float: right;margin-right:60px; color: red">{{ per }}%</span><br>
+										{% endfor %}
+									</td>
+									<td>
+										{% for dialect, per in value['dialect'].items() %}
+										<span style="float: left;margin-left:60px; color: green">{{ dialect }}</span><span style="float: right;margin-right:60px; color: red">{{ per }}%</span><br>
+										{% endfor %}
+									</td>
+								</tr>
+							{% endfor %}
+						{%endif %}
+			        </tbody>
+			      </table>
+				</div>
+		  </div>
+		  <div class="tab-pane fade {% if variables is not none %}{{'show active'}} {%endif %}" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+		  	<div class="col s12">
+			  	<form action="{{ url_for('predictFile')}}" method="post" enctype="multipart/form-data">
+					<label for="exampleFormControlTextarea1" style="font-size: 20px; margin-top: 10px;">Entre your File :</label>
+				    <div class="file-field input-field">
+				      <div class="btn">
+				        <span>File</span>
+				        <input type="file" name="csvFile">
+				      </div>
+				      <div class="file-path-wrapper">
+				        <input class="file-path validate" type="text">
+				      </div>
+						<button type="submit" class="btn btn-primary mb-2" style="margin-top: 20px">Submit</button>
+				    </div>
+				  </form>
+				<table class="highlight" style="width: 100%; table-layout: fixed;">
+				        <thead>
+				          <tr>
+				              <th style="text-align: center; width: 40%">Tweet</th>
+				              <th style="text-align: center; width: 20%">Sentiment</th>
+				              <th style="text-align: center; width: 20%">Topic</th>
+				              <th style="text-align: center; width: 20%">Dialect</th>
+				          </tr>
+				        </thead>
+
+				        <tbody>
+				        	{% if variables is not none %} 
+					        	{% for value in variables %}
+									<tr>
+										<td style="float: right;"> {{ value['tweet'] }} </td>
+										<td>
+											{% for sentiment, per in value['sentiment'].items() %}
+											<span style="float: left;margin-left:60px;color: green">{{ sentiment }}</span><span style="float: right;margin-right:60px; color: red">{{ per }}%</span><br>
+											{% endfor %}
+										</td>
+										<td>
+											{% for topic, per in value['topic'].items() %}
+											<span style="float: left;margin-left:60px;color: green">{{ topic }}</span><span style="float: right;margin-right:60px; color: red">{{ per }}%</span><br>
+											{% endfor %}
+										</td>
+										<td>
+											{% for dialect, per in value['dialect'].items() %}
+											<span style="float: left;margin-left:60px;color: green">{{ dialect }}</span><span style="float: right;margin-right:60px; color: red">{{ per }}%</span><br>
+											{% endfor %}
+										</td>
+									</tr>
+								{% endfor %}
+							{%endif %}
+				        </tbody>
+				    </table>  
+		  	</div>
+		  </div>
+		</div>
+	</div>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</html>
