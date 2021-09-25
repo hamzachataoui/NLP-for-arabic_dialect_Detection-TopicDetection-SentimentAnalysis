@@ -22,7 +22,25 @@ best hyper-parametres.
 # Conclusion
 Conclusion In this work we presented a Labeled data set of 50K tweets in five (5) Arabic dialects. We presented the process of labeling this data for dialect detection, topic detection and sentiment analysis. We put this labeled data openly available for the research, startup and industrial community to build models for applications related to NLP for dialectal Arabic. We believe that initiatives such as ours can catalyse the innovation and the technological development of AI solutions in Arab countries like Morocco by removing the burden linked to the non availability of labeled data and to time-consuming tasks of collecting and manually labeling data. We also presented a set of Machine learning models that can be used as baseline models and to which future users of this data set can compare and aim to outperform by innovating in term of computational methods and algorithms. The labeled data set can be downloaded at [1], and all the implemented algorithms are available at
 
+#Running the project
 
+Ensure that you are in the project home directory. Create the machine learning model by running below command -
+python model.py
+This would create a serialized version of our model into a file model.pkl
+
+Run app.py using below command to start Flask API
+python app.py
+By default, flask will run on port 5000.
+
+Navigate to URL http://localhost:5000
+You should be able to view the homepage as below : alt text
+
+Enter valid numerical values in all 3 input boxes and hit Predict.
+
+If everything goes well, you should be able to see the predcited salary vaule on the HTML page! alt text
+
+You can also send direct POST requests to FLask API using Python's inbuilt request module Run the beow command to send the request with some pre-popuated values -
+python request.py
 
 
 
