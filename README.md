@@ -13,5 +13,17 @@ innovation and encourage other works in the field of NLP for Arabic dialects and
 set and are presented in this paper along with their performances.
 ### Keywords: NLP · Open data · Supervised learning · Arab dialects.
 
+#Data
+The data was gathered by randomly scrapping tweets, from active users located
+in a predefined set of Arab countries, namely : Algeria, Egypt, Lebanon, Tunisia
+and Morocco. No limits were set for the date of the tweets nor for the exact
+location in the country. We used Selenium Python library to automate the web
+navigation and BeautifulSoup to scrap the tweets. The total number of tweets
+in the data set is 49,306. The tweets distribution per country is given in table 1.
+![image](https://user-images.githubusercontent.com/59541945/134767292-00c8a7be-9926-4c32-962d-8bcb3dacbf59.png)
+
+                              Table 1: Number of tweets per country
+
+
 
 
