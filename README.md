@@ -20,9 +20,9 @@ and Morocco. No limits were set for the date of the tweets nor for the exact
 location in the country. We used Selenium Python library to automate the web
 navigation and BeautifulSoup to scrap the tweets. The total number of tweets
 in the data set is 49,306. The tweets distribution per country is given in table 1.
-![image](https://user-images.githubusercontent.com/59541945/134767292-00c8a7be-9926-4c32-962d-8bcb3dacbf59.png)
 
-                              Table 1: Number of tweets per country
+![image](https://user-images.githubusercontent.com/59541945/134767292-00c8a7be-9926-4c32-962d-8bcb3dacbf59.png)
+                      Table 1: Number of tweets per country
 
 
 
