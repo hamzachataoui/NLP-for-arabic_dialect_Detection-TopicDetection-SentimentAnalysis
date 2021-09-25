@@ -1,4 +1,4 @@
-### Abstract
+# Abstract
 Natural Language Processing (NLP) is today a very active
 field of research and innovation. Many applications need however big sets
 of data for supervised learning, suitably labelled for the training purpose.
@@ -11,7 +11,7 @@ twits in five (5) national dialects. Furthermore, this data was labeled for
 several applications, namely dialect detection, topic detection and sentiment analysis. We publish this data as an open access data to encourage
 innovation and encourage other works in the field of NLP for Arabic dialects and social media. A selection of models were built using this data
 set and are presented in this paper along with their performances.
-## Keywords: NLP · Open data · Supervised learning · Arab dialects.
+### Keywords: NLP · Open data · Supervised learning · Arab dialects.
 
 
 
